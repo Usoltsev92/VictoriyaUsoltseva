@@ -1,0 +1,415 @@
+Я убрал круглые рамки-«кружочки» для фотографий и заменил их на крупные смайлики лилий (эмодзи 🌸 и 💮) в качестве основного декоративного элемента. Сами фотографии теперь используются как нежный фоновый узор, чтобы сохранить атмосферу, но с акцентом на смайликах-лилиях.
+
+Вот обновлённый код:
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Виктория, с возвращением! 🌸💮</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f9f3f0 0%, #fceef5 50%, #f3e9f1 100%);
+      background-attachment: fixed;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+      color: #4a3b42;
+    }
+
+    /* Анимированный фон с лепестками */
+    .petals-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(2px);
+      border-radius: 50% 0 50% 0;
+      box-shadow: 0 0 15px rgba(255, 240, 245, 0.9);
+      animation: floatPetal 12s infinite ease-in-out;
+      opacity: 0.6;
+      transform: rotate(0deg);
+    }
+
+    @keyframes floatPetal {
+      0% {
+        transform: translateY(110vh) rotate(0deg) scale(0.8);
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.8;
+        transform: translateY(40vh) rotate(180deg) scale(1.2);
+      }
+      100% {
+        transform: translateY(-20vh) rotate(360deg) scale(0.7);
+        opacity: 0.2;
+      }
+    }
+
+    .soft-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 235, 245, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: 0;
+      animation: moveGlow 18s infinite alternate ease-in-out;
+    }
+
+    @keyframes moveGlow {
+      0% { top: 10%; left: 10%; transform: scale(1); }
+      100% { top: 70%; left: 70%; transform: scale(1.4); }
+    }
+
+    .main-card {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      width: 100%;
+      background: rgba(255, 250, 252, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 60px 60px 70px 70px;
+      padding: 50px 40px 60px;
+      box-shadow: 0 30px 70px rgba(180, 140, 150, 0.25),
+                  0 10px 25px rgba(255, 220, 230, 0.5),
+                  inset 0 1px 10px rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      text-align: center;
+      animation: cardAppear 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      transform-origin: center;
+    }
+
+    @keyframes cardAppear {
+      0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.7rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #b3446c;
+      text-shadow: 0 4px 15px rgba(255, 220, 220, 0.8);
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      animation: gentlePulse 3s infinite alternate;
+      line-height: 1.2;
+    }
+
+    @keyframes gentlePulse {
+      0% { text-shadow: 0 4px 15px rgba(255, 200, 210, 0.7); color: #b3446c; }
+      100% { text-shadow: 0 8px 25px rgba(255, 180, 200, 0.9); color: #c25d7a; }
+    }
+
+    .sub-greeting {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #7b5b6a;
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadeSlideUp 2.5s ease-out;
+    }
+
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart-icon {
+      color: #e6738f;
+      font-size: 2rem;
+      animation: heartbeat 1.6s infinite;
+      filter: drop-shadow(0 0 8px #ffb6c1);
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.25); }
+      50% { transform: scale(1.1); }
+      70% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    /* Блок смайликов-лилий – заменяет кружочки */
+    .lilies-emoji-garden {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin: 35px 0 30px;
+      position: relative;
+    }
+
+    .lily-emoji {
+      font-size: 5.5rem;
+      line-height: 1;
+      filter: drop-shadow(0 10px 20px rgba(180, 130, 150, 0.5));
+      animation: floatEmoji 4s infinite alternate ease-in-out;
+      transition: all 0.4s ease;
+      display: inline-block;
+      background: transparent;
+    }
+
+    .lily-emoji:nth-child(2) {
+      animation-delay: 0.7s;
+      animation-duration: 4.3s;
+      font-size: 5.8rem;
+    }
+    .lily-emoji:nth-child(3) {
+      animation-delay: 1.4s;
+      animation-duration: 3.8s;
+      font-size: 5.3rem;
+    }
+
+    @keyframes floatEmoji {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-14px) scale(1.07); }
+    }
+
+    .lily-emoji:hover {
+      transform: scale(1.15) translateY(-6px);
+      filter: drop-shadow(0 15px 25px rgba(200, 130, 160, 0.7));
+    }
+
+    /* Тонкая подложка с фотографиями лилий – очень прозрачная, как узор */
+    .lily-photo-veil {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 5px;
+      opacity: 0.25;
+      pointer-events: none;
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .veil-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 30% 70% 50% 50% / 30% 40% 60% 70%;
+      object-fit: cover;
+      filter: blur(1px) brightness(1.2);
+    }
+
+    .message-block {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(12px);
+      border-radius: 50px;
+      padding: 35px 25px;
+      margin: 25px 0 30px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 15px 30px rgba(150, 100, 120, 0.15);
+      animation: softGlowPulse 4s infinite alternate;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes softGlowPulse {
+      0% { box-shadow: 0 15px 30px rgba(220, 160, 180, 0.15); }
+      100% { box-shadow: 0 25px 45px rgba(210, 140, 160, 0.3); }
+    }
+
+    .love-text {
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: #543c46;
+      margin: 10px 0;
+      letter-spacing: 0.5px;
+      animation: textShimmer 4s infinite;
+    }
+
+    @keyframes textShimmer {
+      0%, 100% { color: #543c46; }
+      50% { color: #ad5b72; }
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #b3446c;
+      font-size: 1.7rem;
+      display: inline-block;
+      animation: bounceText 2s infinite;
+      text-shadow: 0 2px 12px #ffd9e6;
+    }
+
+    @keyframes bounceText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .signature {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2.3rem;
+      margin-top: 20px;
+      color: #9c5e74;
+      opacity: 0.9;
+    }
+
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .fa-heart {
+      position: absolute;
+      color: rgba(230, 120, 140, 0.5);
+      font-size: 1.8rem;
+      animation: riseHeart 7s infinite;
+      opacity: 0;
+    }
+
+    @keyframes riseHeart {
+      0% { bottom: -10%; opacity: 0; transform: translateX(0) rotate(0deg); }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.4; }
+      100% { bottom: 110%; opacity: 0; transform: translateX(25px) rotate(20deg); }
+    }
+
+    @media (max-width: 600px) {
+      .main-card {
+        padding: 35px 25px 45px;
+        border-radius: 45px;
+      }
+      h1 {
+        font-size: 2.8rem;
+      }
+      .lily-emoji {
+        font-size: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="soft-glow" style="top: 5%; left: 5%;"></div>
+  <div class="soft-glow" style="bottom: 5%; right: 5%; background: radial-gradient(circle, rgba(250,240,245,0.6) 0%, transparent 70%);"></div>
+
+  <div class="petals-bg" id="petalsContainer"></div>
+  <div class="floating-hearts" id="heartsContainer"></div>
+
+  <div class="main-card">
+    <h1>Виктория</h1>
+    <div class="sub-greeting">
+      <span>Ты дома!</span>
+      <i class="fas fa-heart heart-icon"></i>
+      <span>С возвращением</span>
+    </div>
+
+    <!-- Смайлики лилий вместо кружочков -->
+    <div class="lilies-emoji-garden">
+      <span class="lily-emoji">🌸</span>
+      <span class="lily-emoji">💮</span>
+      <span class="lily-emoji">🌸</span>
+    </div>
+
+    <!-- Очень деликатные фотографии лилий как фоновый элемент (не круглые, мягкие формы) -->
+    <div style="position: relative; height: 0; width: 100%;">
+      <div class="lily-photo-veil">
+        <img class="veil-img" src="https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=200" alt="лилия">
+        <img class="veil-img" src="https://images.pexels.com/photos/1133388/pexels-photo-1133388.jpeg?auto=compress&cs=tinysrgb&w=200" alt="лилия">
+        <img class="veil-img" src="https://images.pexels.com/photos/1527244/pexels-photo-1527244.jpeg?auto=compress&cs=tinysrgb&w=200" alt="лилия">
+      </div>
+    </div>
+
+    <div class="message-block">
+      <p class="love-text">
+        Мы очень рады, что ты снова с нами!<br>
+        <span style="font-size: 1.3rem;">Чем бы ты ни болела –</span><br>
+        <strong>мы бесконечно ждали и очень любим тебя!</strong>
+      </p>
+      <p class="love-text" style="margin-top: 18px;">
+        <span class="highlight">Вика, ты классная!</span><br>
+        <span class="highlight">Вика, ты лучшая!</span>
+      </p>
+      <p class="love-text" style="font-size: 1.9rem; font-weight: 500; margin: 20px 0 5px;">
+        Всю жизнь буду тебя любить 💖
+      </p>
+      <div class="signature">🌸 Твои близкие 🌸</div>
+    </div>
+
+    <div style="margin-top: 10px; color: #c28498; font-size: 1.8rem; display: flex; justify-content: center; gap: 25px; opacity: 0.8;">
+      <i class="fas fa-feather-alt" style="animation: gentlePulse 2s infinite;"></i>
+      <i class="fas fa-dove" style="animation: floatEmoji 3s infinite;"></i>
+      <i class="fas fa-spa" style="animation: gentlePulse 2.5s infinite;"></i>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const petalsContainer = document.getElementById('petalsContainer');
+      for (let i = 0; i < 28; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        const size = Math.floor(Math.random() * 30 + 18);
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.animationDelay = Math.random() * 12 + 's';
+        petal.style.animationDuration = Math.random() * 15 + 10 + 's';
+        petal.style.background = `rgba(255, ${230 + Math.floor(Math.random()*25)}, ${240 + Math.floor(Math.random()*15)}, 0.55)`;
+        petalsContainer.appendChild(petal);
+      }
+
+      const heartsContainer = document.getElementById('heartsContainer');
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('i');
+        heart.className = 'fas fa-heart';
+        heart.style.left = Math.random() * 90 + '%';
+        heart.style.animationDelay = Math.random() * 8 + 's';
+        heart.style.animationDuration = Math.random() * 7 + 6 + 's';
+        heart.style.fontSize = (Math.random() * 20 + 14) + 'px';
+        heart.style.color = `rgba(240, ${120 + Math.floor(Math.random()*40)}, 150, 0.4)`;
+        heartsContainer.appendChild(heart);
+      }
+    })();
+  </script>
+</body>
+</html>
+```
